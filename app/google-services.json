@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "899822874464",
+    "firebase_url": "https://aimisencargos-41014.firebaseio.com",
+    "project_id": "aimisencargos-41014",
+    "storage_bucket": "aimisencargos-41014.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:899822874464:android:3920d13dc8fec7261bb805",
+        "android_client_info": {
+          "package_name": "com.mycompany.aimisencargos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "899822874464-hmjd7f3eh29gsdgdbqor70lom06hva43.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrzkMu5Qswkv5NxtBcgZBetCgIgbfeFAc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "899822874464-hmjd7f3eh29gsdgdbqor70lom06hva43.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
