@@ -1,13 +1,17 @@
 package com.mycompany.aimisencargos.Entidades;
 
 public class Usuario {
+    private String dni;
     private String nombre;
     private String apellido;
     private int telefono;
     private String mail;
     private String direccion;
 
-    public Usuario(String nombre, String apellido, int telefono, String mail, String direccion) {
+
+
+    public Usuario(String dni, String nombre, String apellido, int telefono, String mail, String direccion) {
+        this.dni=dni;
         this.nombre = nombre;
         this.apellido = apellido;
         this.telefono = telefono;
@@ -16,6 +20,13 @@ public class Usuario {
     }
 
 
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
 
     public String getNombre() {
         return nombre;

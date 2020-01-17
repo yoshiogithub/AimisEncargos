@@ -15,16 +15,16 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.mycompany.aimisencargos.Entidades.Usuario;
 import com.mycompany.aimisencargos.R;
 
+import java.security.Key;
 import java.util.HashMap;
 import java.util.Map;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText Nombre,Apellido,Telefono,Mail,Direccion;
+    EditText Nombre,Apellido,Telefono,Mail,Direccion,Dni,Buscar;
     DatabaseReference reference;
     TextView textView;
 
@@ -33,7 +33,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        textView=findViewById(R.id.textView5);
+        textView=findViewById(R.id.textResultado);
+        Buscar=findViewById(R.id.txtBuscar);
+        Dni=findViewById(R.id.txtDni);
         Nombre=findViewById(R.id.txtNombre);
         Apellido=findViewById(R.id.txtApellido);
         Telefono=findViewById(R.id.txtTelefono);
@@ -46,8 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void Agregar(View view){
-
-
+        String dni=Dni.getText().toString();
         String nombre=Nombre.getText().toString();
         String apellido=Apellido.getText().toString();
         int telefono=Integer.parseInt(Telefono.getText().toString());
@@ -61,9 +62,39 @@ public class MainActivity extends AppCompatActivity {
         DatosUsuario.put("mail",mail);
         DatosUsuario.put("direccion",direccion);
 
-        reference.child("Usuarios").push().setValue(DatosUsuario);
+        reference.child("Usuarios").child(dni).setValue(DatosUsuario);
 
         Limpiar();
+
+    }
+
+
+
+    public void Ver(View view){
+        String buscar=Buscar.getText().toString();
+        reference.child("Usuarios").child(buscar).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                if(dataSnapshot.exists()){
+
+                    String nombre=dataSnapshot.child("nombre").getValue().toString();
+                    String apellido=dataSnapshot.child("apellido").getValue().toString();
+                    int telefono= Integer.parseInt(dataSnapshot.child("telefono").getValue().toString());
+                    String mail=dataSnapshot.child("mail").getValue().toString();
+                    String direccion=dataSnapshot.child("direccion").getValue().toString();
+
+
+                    textView.setText("Nombre : "+nombre+"\nApellido : "+apellido+"\nDireccion : "+direccion+
+                            "\nTelefono : "+telefono+"\nEmail : "+mail);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
     }
 
@@ -73,5 +104,6 @@ public class MainActivity extends AppCompatActivity {
         Telefono.setText("");
         Mail.setText("");
         Direccion.setText("");
+        Buscar.setText("");
     }
 }
